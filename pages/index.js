@@ -26,9 +26,8 @@ export default function Home() {
        const response = await axios.post('/api/fetch-html', {
       url,
       screenshotEnabled
-    })
-       console.log('response', response.data)
-    setHash(response.data.id)
+    }).then(resp => console.log("data", resp.data))
+    setHash(response.data.cid)
     setLink(response.data.link)
     setScreenshot(response.data.screenshotUri)
     setUrl('')

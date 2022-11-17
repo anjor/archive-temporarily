@@ -1,28 +1,6 @@
 import puppeteer from 'puppeteer'
-
-async function uploadToEstuary(data={}) {
-  const formData = new FormData();
-  for (const name in data) {
-    formData.append(name, data[name])
-  }
-  const response = await fetch('https://upload.estuary.tech/content/add',
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': 'Bearer ' + process.env.ESTUARY_KEY,
-        },
-        body: formData
-      }
-  )
-  console.log(response.status)
-  console.log(response.statusText)
-  console.log(response.json())
-  if (response.status !== 200) {
-    console.log(response.json())
-  }
-  return response.json()
-}
-
+import File from "file-class"
+import * as url from "url";
 export default async function handler(req, res) {
   const { body } = req
   let screenshotUri = null
@@ -56,8 +34,22 @@ export default async function handler(req, res) {
       await browser.close()
       /* end puppeteer */
 
-      const response = uploadToEstuary(screenshot)
-      screenshotUri = response['retrieval_url']
+      //const response = uploadToEstuary(screenshot)
+      const formData = new FormData();
+      for (const name in screenshot) {
+        formData.append(name, screenshot[name])
+      }
+      const response = await fetch('https://upload.estuary.tech/content/add',
+          {
+            method: 'POST',
+            headers: {
+              'Authorization': 'Bearer ' + process.env.ESTUARY_KEY,
+            },
+            body: formData
+          }
+      )
+      const resp = await response.json()
+      screenshotUri = resp['retrieval_url']
     } catch (err) {
       res.status(200).json({
         error: err
@@ -90,12 +82,33 @@ export default async function handler(req, res) {
   let finalText = arr.join(" ")
   finalText = finalText.replace(/(^[ \t]*\n)/gm, "")
   finalText = finalText.replace(/(^"|"$)/g, '')
+  const file = new File(finalText, req.url)
 
-  const resp = uploadToEstuary(finalText)
-  const dataURI = resp['retrieval_uri']
+  //const resp = uploadToEstuary(finalText)
+  const formData = new FormData();
+  formData.append('data', file)
+  console.log(formData)
+  const resp = await fetch('https://upload.estuary.tech/content/add',
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + process.env.ESTUARY_KEY,
+        },
+        body: formData
+      }
+  )
+  const data = await resp.json()
+  const dataURI = data['retrieval_uri']
+  const cid = data['cid']
+
+  console.log(data)
+  console.log("cid", cid)
+  console.log("retrieval url", dataURI)
+  console.log(screenshotUri)
 
   res.status(200).json({
     link: dataURI,
-    screenshotUri
+    screenshotUri,
+    cid
   })
 }
