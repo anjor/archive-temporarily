@@ -21,10 +21,13 @@ export default function Home() {
     setHash('')
     setScreenshot('')
    try {
-    const response = await axios.post('/api/fetch-html', {
+       console.log("url", url)
+       console.log("screenshotEnabled", screenshotEnabled)
+       const response = await axios.post('/api/fetch-html', {
       url,
       screenshotEnabled
     })
+       console.log('response', response.data)
     setHash(response.data.id)
     setLink(response.data.link)
     setScreenshot(response.data.screenshotUri)

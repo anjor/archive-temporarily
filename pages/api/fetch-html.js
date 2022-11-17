@@ -1,17 +1,22 @@
 import puppeteer from 'puppeteer'
 
 async function uploadToEstuary(data={}) {
+  const formData = new FormData();
+  for (const name in data) {
+    formData.append(name, data[name])
+  }
   const response = await fetch('https://upload.estuary.tech/content/add',
       {
         method: 'POST',
         headers: {
           'Authorization': 'Bearer ' + process.env.ESTUARY_KEY,
-          'Content-Type': 'multipart/form-data'
         },
-        body: data
+        body: formData
       }
   )
-
+  console.log(response.status)
+  console.log(response.statusText)
+  console.log(response.json())
   if (response.status !== 200) {
     console.log(response.json())
   }
