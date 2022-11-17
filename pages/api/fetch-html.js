@@ -1,8 +1,22 @@
-import Bundlr from '@bundlr-network/client'
 import puppeteer from 'puppeteer'
 
-const PK = process.env.BNDLR_KEY
-const bundlr = new Bundlr("https://node1.bundlr.network", "matic", PK)
+async function uploadToEstuary(data={}) {
+  const response = await fetch('https://upload.estuary.tech/content/add',
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + process.env.ESTUARY_KEY,
+          'Content-Type': 'multipart/form-data'
+        },
+        body: data
+      }
+  )
+
+  if (response.status !== 200) {
+    console.log(response.json())
+  }
+  return response.json()
+}
 
 export default async function handler(req, res) {
   const { body } = req
@@ -37,13 +51,8 @@ export default async function handler(req, res) {
       await browser.close()
       /* end puppeteer */
 
-      const imageTags = [{name: 'Content-Type', value: 'image/png' }]
-      const imageTransaction = bundlr.createTransaction(screenshot, { tags: imageTags })
-
-      await imageTransaction.sign()
-      let imageId = imageTransaction.id
-      await imageTransaction.upload()
-      screenshotUri = `https://arweave.net/${imageId}`
+      const response = uploadToEstuary(screenshot)
+      screenshotUri = response['retrieval_url']
     } catch (err) {
       res.status(200).json({
         error: err
@@ -76,19 +85,12 @@ export default async function handler(req, res) {
   let finalText = arr.join(" ")
   finalText = finalText.replace(/(^[ \t]*\n)/gm, "")
   finalText = finalText.replace(/(^"|"$)/g, '')
-  const tags = [{name: "Content-Type", value: "text/html"}]
 
-  const transaction = bundlr.createTransaction(finalText, { tags })
-
-  await transaction.sign()
-  let id = transaction.id
-  await transaction.upload()
-  const arweaveURI = `https://arweave.net/${id}`
-  // fs.writeFileSync('./page.html', finalText)
+  const resp = uploadToEstuary(finalText)
+  const dataURI = resp['retrieval_uri']
 
   res.status(200).json({
-    link: arweaveURI,
-    screenshotUri,
-    id
+    link: dataURI,
+    screenshotUri
   })
 }

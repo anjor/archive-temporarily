@@ -40,30 +40,17 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Archive Forever</title>
-        <meta name="description" content="Archive any webpage forever on the blockchain with Arweave" />
+        <title>Archive Temporarily</title>
+        <meta name="description" content="Archive any webpage forever on the blockchain with Filecoin" />
         <link rel="icon" href="/favicon.ico" />
         
-        <meta property="og:url" content="https://www.archiveforever.xyz/" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Archive Forever" />
-        <meta property="og:description" content="Archive any webpage forever on the blockchain with Arweave." />
-        <meta property="og:image" content="https://raw.githubusercontent.com/dabit3/archive-forever/main/public/igimage.jpg" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="archiveforever.xyz" />
-        <meta property="twitter:url" content="https://www.archiveforever.xyz/" />
-        <meta name="twitter:title" content="Archive Forever" />
-        <meta name="twitter:description" content="Archive any webpage forever on the blockchain with Arweave." />
-        <meta name="twitter:image" content="https://raw.githubusercontent.com/dabit3/archive-forever/main/public/igimage.jpg" />
-        <meta name="twitter:image:src" content="https://raw.githubusercontent.com/dabit3/archive-forever/main/public/igimage.jpg" />
       </Head>
       <div className={wrapperStyle}>
         <div className={mainContainerStyle}>
           <h1 className={titleStyle}>
-            ARCHIVE FOREVER
+            ARCHIVE TEMPORARILY
           </h1>
-          <p className={descriptionStyle}>Archive any webpage, forever.</p>
+          <p className={descriptionStyle}>Archive any webpage, temporarily.</p>
           <input
             onChange={e => {
               setUrl(e.target.value)
@@ -134,7 +121,7 @@ export default function Home() {
             hash && (
               <div className={transactionInfoContainer}>
                 <p className={transactionHashStyle}>Arweave transaction hash: <span className={hashStyle}>{hash}</span></p>
-                <p>Want to support this project? Send Matic, ETH, or stablecoins to <a href="https://polygonscan.com/address/0xf59B3Cd80021b77c43EA011356567095C4E45b0e" target="_blank" rel="noopener" className={hashStyle}>this address.</a></p>
+                <p>Want to support this project? Send Matic, ETH, or stablecoins to <a href="https://polygonscan.com/address/0x40696c3503CD8248da4b0bF9d02432Dc22ec274A" target="_blank" rel="noopener" className={hashStyle}>this address.</a></p>
               </div>
             )
           }
