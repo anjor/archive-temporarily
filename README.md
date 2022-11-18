@@ -1,6 +1,6 @@
 ## Archive forever
 
-To run this locally, you must have a [Browserless](https://www.browserless.io/) API key and an [Estuary](https://estuary.tech/) API key.
+To run this locally, you will need a [Browserless](https://www.browserless.io/) API key and an [Estuary](https://estuary.tech/) API key.
 
 ### Run locally
 
