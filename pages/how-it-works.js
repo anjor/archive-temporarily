@@ -18,10 +18,13 @@ export default function HowItWorks() {
           <h1 className={titleStyle}>HOW IT WORKS.</h1>
           <div className={textContainerStyle}>
             <p>
-              This is an homage to <a href="https://www.archiveforever.xyz/" target="_blank" rel="noopener">Archive Forever</a> built by the inimitable <a href="https://twitter.com/dabit3" target="_blank" rel="noopener">Nader</a>.
+              This is a h/t to <a href="https://www.archiveforever.xyz/" target="_blank" rel="noopener">Archive Forever</a> built by the inimitable <a href="https://twitter.com/dabit3" target="_blank" rel="noopener">Nader</a>.
             </p>
             <p>
-            <a href="https://filecoin.io/" target="_blank" rel="noopener">Filecoin</a> is a decentralised storage network designed to store humanity's most important information.
+              The key difference is that this website is built on top of <a href="https://filecoin.io/" target="_blank" rel="noopener">Filecoin</a> using <a href="https://estuary.tech/" target="_blank" rel="noopener">Estuary</a>.
+              </p>
+            <p>
+            Estuary is currently in alpha and is invite-only, but if you mention this website in the <a href="https://docs.estuary.tech/get-invite-key" target="_blank" rel="noopener">request form</a> we'll make sure you get access!
             </p>
 
             <p>Want to support this project? Send Matic, ETH, or stablecoins to <a href="https://polygonscan.com/address/0x40696c3503CD8248da4b0bF9d02432Dc22ec274A" target="_blank" rel="noopener">this address.</a></p>
