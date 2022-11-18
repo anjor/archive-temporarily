@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer'
-import {Blob} from 'node:buffer';
+import {Blob} from 'node-blob';
 import FormData from "form-data";
 
 export default async function handler(req, res) {
