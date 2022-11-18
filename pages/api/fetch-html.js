@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer'
 import {Blob} from 'node:buffer';
+import FormData from "form-data";
 
 export default async function handler(req, res) {
   const { body } = req
@@ -96,8 +97,8 @@ export default async function handler(req, res) {
       }
   )
   const data = await resp.json()
-  const dataURI = data['retrieval_url']
   const cid = data['cid']
+  const dataURI = 'https://api.estuary.tech/gw/ipfs/' + cid
 
   res.status(200).json({
     link: dataURI,
