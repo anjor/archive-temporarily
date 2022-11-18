@@ -2,7 +2,6 @@ import '../styles/globals.css'
 import { css } from '@emotion/css'
 import Link from 'next/link'
 import Script from 'next/script'
-import { Analytics } from '@vercel/analytics/react'
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -21,7 +20,6 @@ function MyApp({ Component, pageProps }) {
         <p className={footerText}><Link href="/how-it-works">How it works. </Link> Built with &nbsp;<a rel="noopener" href="https://estuary.tech/" target="_blank">Estuary</a>
          <a href="https://github.com/anjor/archive-temporarily" rel="noopener" target="_blank"><img className={githubLinkStyle} src='/github.svg' alt='loading...' /></a></p>
       </footer>
-      <Analytics />
     </div>
   )
 }

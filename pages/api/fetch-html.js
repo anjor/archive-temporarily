@@ -1,7 +1,5 @@
 import puppeteer from 'puppeteer'
 
-const File = require('file-class');
-import * as url from "url";
 export default async function handler(req, res) {
   const { body } = req
   let screenshotUri = null
