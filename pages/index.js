@@ -45,7 +45,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Archive Temporarily</title>
+        <title>Archive to Filecoin</title>
         <meta name="description" content="Archive any webpage forever on the blockchain with Filecoin" />
         <link rel="icon" href="/favicon.ico" />
         
@@ -53,9 +53,9 @@ export default function Home() {
       <div className={wrapperStyle}>
         <div className={mainContainerStyle}>
           <h1 className={titleStyle}>
-            ARCHIVE TEMPORARILY
+            ARCHIVE TO FILECOIN
           </h1>
-          <p className={descriptionStyle}>Archive any webpage, temporarily.</p>
+          <p className={descriptionStyle}>Archive any webpage.</p>
           <input
             onChange={e => {
               setUrl(e.target.value)
