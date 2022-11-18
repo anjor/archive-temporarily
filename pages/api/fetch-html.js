@@ -1,4 +1,5 @@
 import puppeteer from 'puppeteer'
+import {Blob} from 'node:buffer';
 
 export default async function handler(req, res) {
   const { body } = req
