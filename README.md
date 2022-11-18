@@ -1,8 +1,6 @@
 ## Archive forever
 
-To run this locally, you must have a [Browserless](https://www.browserless.io/) API key and a funded wallet from [Bundlr](https://bundlr.network/).
-
-You can fund your Bundlr wallet [here](https://demo.bundlr.network/).
+To run this locally, you must have a [Browserless](https://www.browserless.io/) API key and an [Estuary](https://estuary.tech/) API key.
 
 ### Run locally
 
