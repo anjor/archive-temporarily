@@ -47,7 +47,7 @@ export default async function handler(req, res) {
           }
       )
       const resp = await response.json()
-      screenshotUri = resp['retrieval_url']
+      screenshotUri = 'https://api.estuary.tech/gw/ipfs/' + resp['cid']
     } catch (err) {
       res.status(200).json({
         error: err
