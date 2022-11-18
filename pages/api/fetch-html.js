@@ -1,5 +1,4 @@
 import puppeteer from 'puppeteer'
-var FormData = require('form-data');
 
 export default async function handler(req, res) {
   const { body } = req
