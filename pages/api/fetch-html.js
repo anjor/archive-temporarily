@@ -1,5 +1,4 @@
 import puppeteer from 'puppeteer'
-let Blob = require('node-blob')
 
 export default async function handler(req, res) {
   const { body } = req
