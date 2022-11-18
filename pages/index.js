@@ -7,7 +7,7 @@ export default function Home() {
   const [url, setUrl] = useState('')
   const [link, setLink] = useState('')
   const [screenshot, setScreenshot] = useState('')
-  const [hash, setHash] = useState('')
+  const [cid, setCid] = useState('')
   const [loading, setLoading] = useState(false)
   const [screenshotEnabled, setScreenshotEnabled] = useState(false)
   async function post() {
@@ -18,7 +18,7 @@ export default function Home() {
     }
     setLoading(true)
     setLink('')
-    setHash('')
+    setCid('')
     setScreenshot('')
    try {
        console.log("url", url)
@@ -26,8 +26,11 @@ export default function Home() {
        const response = await axios.post('/api/fetch-html', {
       url,
       screenshotEnabled
-    }).then(resp => console.log("data", resp.data))
-    setHash(response.data.cid)
+    })
+       console.log("cid:", response.data.cid)
+       console.log("link:", response.data.link)
+       console.log("screenshotUri:", response.data.screenshotUri)
+    setCid(response.data.cid)
     setLink(response.data.link)
     setScreenshot(response.data.screenshotUri)
     setUrl('')
@@ -57,7 +60,7 @@ export default function Home() {
             onChange={e => {
               setUrl(e.target.value)
               setLink('')
-              setHash('')
+              setCid('')
               setScreenshot('')
               setScreenshotEnabled(false)
             }}
@@ -120,9 +123,9 @@ export default function Home() {
             )
           }
           {
-            hash && (
+            cid && (
               <div className={transactionInfoContainer}>
-                <p className={transactionHashStyle}>Arweave transaction hash: <span className={hashStyle}>{hash}</span></p>
+                <p className={transactionHashStyle}>CID: <span className={hashStyle}>{cid}</span></p>
                 <p>Want to support this project? Send Matic, ETH, or stablecoins to <a href="https://polygonscan.com/address/0x40696c3503CD8248da4b0bF9d02432Dc22ec274A" target="_blank" rel="noopener" className={hashStyle}>this address.</a></p>
               </div>
             )

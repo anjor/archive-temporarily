@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer'
-import File from "file-class"
+
+const File = require('file-class');
 import * as url from "url";
 export default async function handler(req, res) {
   const { body } = req
@@ -36,9 +37,8 @@ export default async function handler(req, res) {
 
       //const response = uploadToEstuary(screenshot)
       const formData = new FormData();
-      for (const name in screenshot) {
-        formData.append(name, screenshot[name])
-      }
+      const blob = new Blob([screenshot])
+      formData.append('data', blob)
       const response = await fetch('https://upload.estuary.tech/content/add',
           {
             method: 'POST',
@@ -82,12 +82,11 @@ export default async function handler(req, res) {
   let finalText = arr.join(" ")
   finalText = finalText.replace(/(^[ \t]*\n)/gm, "")
   finalText = finalText.replace(/(^"|"$)/g, '')
-  const file = new File(finalText, req.url)
 
   //const resp = uploadToEstuary(finalText)
   const formData = new FormData();
-  formData.append('data', file)
-  console.log(formData)
+  const blob = new Blob([finalText])
+  formData.append('data', blob)
   const resp = await fetch('https://upload.estuary.tech/content/add',
       {
         method: 'POST',
@@ -98,13 +97,8 @@ export default async function handler(req, res) {
       }
   )
   const data = await resp.json()
-  const dataURI = data['retrieval_uri']
+  const dataURI = data['retrieval_url']
   const cid = data['cid']
-
-  console.log(data)
-  console.log("cid", cid)
-  console.log("retrieval url", dataURI)
-  console.log(screenshotUri)
 
   res.status(200).json({
     link: dataURI,
